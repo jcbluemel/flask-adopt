@@ -25,17 +25,19 @@ db.create_all()
 
 toolbar = DebugToolbarExtension(app)
 
+
 @app.get('/')
 def index():
-    """Display homepage with list of pets."""
+    """Display homepage with list of all pets."""
 
     pets = Pet.query.all()
 
     return render_template('index.html', pets=pets)
 
+
 @app.route("/add", methods=["GET", "POST"])
 def pet_add():
-    """Show Add pet form on GET request. Add new pet if validated to db
+    """Show AddPet form on GET request. If validated, add new pet to db
         and redirect to homepage."""
 
     form = AddPetForm()
@@ -44,10 +46,10 @@ def pet_add():
 
         pet = Pet(
             name=form.name.data,
-            species = form.species.data,
-            photo_url = form.photo_url.data,
-            age = form.age.data,
-            notes = form.notes.data)
+            species=form.species.data,
+            photo_url=form.photo_url.data,
+            age=form.age.data,
+            notes=form.notes.data)
 
         db.session.add(pet)
         db.session.commit()
@@ -55,13 +57,13 @@ def pet_add():
         return redirect("/")
 
     else:
-        return render_template(
-            "pet_add.html", form=form)
+        return render_template("pet_add.html", form=form)
+
 
 @app.route("/<int:pet_id>", methods=["GET", "POST"])
 def pet_page(pet_id):
-    """Show pet details and edit pet form on GET request. Edit pet if validated
-        to db and redirect back to pet details."""
+    """Show specific pet's details on page along with EditPet form on GET request.
+        If validated, update pet's info in db and redirect back to pet's page."""
 
     pet = Pet.query.get(pet_id)
     form = EditPetForm(obj=pet)
@@ -77,5 +79,4 @@ def pet_page(pet_id):
         return redirect("/")
 
     else:
-        return render_template(
-            "pet_page.html", pet=pet, form=form)
+        return render_template("pet_page.html", pet=pet, form=form)

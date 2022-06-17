@@ -4,19 +4,24 @@
 
 {% block content %}
 
+<!-- homepage - used in test -->
+
 <h1>Pets</h1>
 
 <ul>
     {% for pet in pets %}
         <li>
             <a href="/{{ pet.id }}">{{ pet.name }}</a>
-            <img style="width: 100px"src="{{ pet.photo_url }}" alt="{{ pet.name }}, {{ pet.species }}">
+            <br>
+            <img style="width: 100px"src="{{ pet.photo_url }}"
+                alt="{{ pet.name }}, {{ pet.species }}">
             <p>{% if pet.available %}<b>Available!</b>{% endif %}</p>
         </li>
+        <br>
     {% endfor %}
 </ul>
 
-
+<hr>
 <a href="/add">Add Pet</a>
 
 

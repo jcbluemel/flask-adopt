@@ -1,27 +1,22 @@
 """Models for adopt app."""
 
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import ForeignKey, false, CheckConstraint
+from sqlalchemy import false
 
 db = SQLAlchemy()
 
 
 def connect_db(app):
-    """Connect this database to provided Flask app.
-
-    You should call this in your Flask app.
-    """
+    """Connect this database to provided Flask app."""
 
     db.app = app
     db.init_app(app)
 
+
 class Pet(db.Model):
-    """Pet."""
+    """Model schema for Pet."""
 
     __tablename__ = 'pets'
-
-    #TODO: add to form checking
-    # poss_ages = ['baby', 'young', 'adult', 'senior']
 
     id = db.Column(
         db.Integer,
@@ -38,7 +33,6 @@ class Pet(db.Model):
         default='')
     age = db.Column(
         db.Text,
-        # db.CheckConstraint(f'age in {poss_ages}'),
         nullable=false)
     notes = db.Column(
         db.Text)
@@ -46,4 +40,3 @@ class Pet(db.Model):
         db.Boolean,
         nullable=false,
         default=True)
-

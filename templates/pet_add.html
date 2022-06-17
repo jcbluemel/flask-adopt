@@ -4,26 +4,29 @@
 
 {% block content %}
 
-<h1>Add Pet</h1>
+  <!-- pet_add - used in test -->
 
-<form action="/add" method="POST">
-  {{ form.hidden_tag() }}
 
-  {% for field in form
-         if field.widget.input_type != 'hidden' %}
+  <h1>Add Pet</h1>
 
-    <p>
-      {{ field.label }}
-      {{ field }}
+  <form action="/add" method="POST">
+    {{ form.hidden_tag() }}
 
-      {% for error in field.errors %}
-        {{ error }}
-      {% endfor %}
-    </p>
+    {% for field in form
+          if field.widget.input_type != 'hidden' %}
 
-  {% endfor %}
+      <p>
+        {{ field.label }}
+        {{ field }}
 
-  <button type="submit">Add</button>
-</form>
+        {% for error in field.errors %}
+          {{ error }}
+        {% endfor %}
+      </p>
+
+    {% endfor %}
+
+    <button type="submit">Add</button>
+  </form>
 
 {% endblock %}
