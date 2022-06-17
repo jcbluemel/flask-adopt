@@ -59,23 +59,19 @@ def pet_add():
             "pet_add.html", form=form)
 
 @app.route("/<int:pet_id>", methods=["GET", "POST"])
-def pet_add(pet_id):
-    """Show pet details and Edit pet form on GET request. Edit pet if validated to db
-        and redirect to pet details."""
+def pet_page(pet_id):
+    """Show pet details and edit pet form on GET request. Edit pet if validated
+        to db and redirect back to pet details."""
 
-    form = EditPetForm()
     pet = Pet.query.get(pet_id)
+    form = EditPetForm(obj=pet)
 
     if form.validate_on_submit():
 
-        pet = Pet(
-            name=form.name.data,
-            species = form.species.data,
-            photo_url = form.photo_url.data,
-            age = form.age.data,
-            notes = form.notes.data)
+        pet.photo_url = form.photo_url.data
+        pet.notes = form.notes.data
+        pet.available = form.available.data
 
-        db.session.add(pet)
         db.session.commit()
 
         return redirect("/")
