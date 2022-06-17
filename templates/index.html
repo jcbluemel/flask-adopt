@@ -7,14 +7,16 @@
 <h1>Pets</h1>
 
 <ul>
-    {% for pet of pets %}
-    <li><img src="{{ pet.photo_url }}" alt="">
-        <p>{{ pet.name }} {% if pet.available %}<b>available</b>{{ endif }}</p>
-    </li>
+    {% for pet in pets %}
+        <li>
+            <h4>{{ pet.name }}</h4>
+            <img style="width: 100px"src="{{ pet.photo_url }}" alt="{{ pet.name }}, {{ pet.species }}">
+            <p>{% if pet.available %}<b>Available!</b>{% endif %}</p>
+        </li>
     {% endfor %}
 </ul>
 
-<button></button>
+<button>Booty</button>
 
 
 

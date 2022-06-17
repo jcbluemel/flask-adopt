@@ -35,7 +35,8 @@ def index():
 
 @app.route("/add", methods=["GET", "POST"])
 def pet_add():
-    """Pets add form; handle adding."""
+    """Show Add pet form on GET request. Add new pet if validated to db
+        and redirect to homepage."""
 
     form = AddPetForm()
 
@@ -46,8 +47,7 @@ def pet_add():
             species = form.species.data,
             photo_url = form.photo_url.data,
             age = form.age.data,
-            notes = form.notes.data
-        )
+            notes = form.notes.data)
 
         db.session.add(pet)
         db.session.commit()
