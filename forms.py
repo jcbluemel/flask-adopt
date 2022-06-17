@@ -1,8 +1,6 @@
 """Forms for adopt app."""
 
 from wsgiref.validate import validator
-# TODO: why error with this not commented out?
-# from matplotlib.style import available
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, TextAreaField, BooleanField
 from wtforms.validators import InputRequired, Optional, URL

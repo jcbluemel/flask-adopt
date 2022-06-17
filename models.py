@@ -30,12 +30,15 @@ class Pet(db.Model):
         nullable=false)
     photo_url = db.Column(
         db.Text,
+        nullable=false,
         default='')
     age = db.Column(
         db.Text,
         nullable=false)
     notes = db.Column(
-        db.Text)
+        db.Text,
+        nullable=false,
+        default='')
     available = db.Column(
         db.Boolean,
         nullable=false,

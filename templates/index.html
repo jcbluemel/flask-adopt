@@ -13,8 +13,10 @@
         <li>
             <a href="/{{ pet.id }}">{{ pet.name }}</a>
             <br>
-            <img style="width: 100px"src="{{ pet.photo_url }}"
-                alt="{{ pet.name }}, {{ pet.species }}">
+            {% if pet.photo_url %}
+                <img style="width: 100px"src="{{ pet.photo_url }}"
+                    alt="{{ pet.name }}, {{ pet.species }}">
+            {% endif %}
             <p>{% if pet.available %}<b>Available!</b>{% endif %}</p>
         </li>
         <br>

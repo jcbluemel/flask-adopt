@@ -1,11 +1,8 @@
 """Flask app for adopt app."""
 
-from flask import Flask, render_template, redirect, request
-
+from flask import Flask, render_template, redirect
 from flask_debugtoolbar import DebugToolbarExtension
-
 from models import db, connect_db, Pet
-
 from forms import AddPetForm, EditPetForm
 
 app = Flask(__name__)
@@ -62,10 +59,11 @@ def pet_add():
 
 @app.route("/<int:pet_id>", methods=["GET", "POST"])
 def pet_page(pet_id):
+    #TODO: say what happens if not valid
     """Show specific pet's details on page along with EditPet form on GET request.
-        If validated, update pet's info in db and redirect back to pet's page."""
+        If validated, update pet's info in db and redirect back to homepage."""
 
-    pet = Pet.query.get(pet_id)
+    pet = Pet.query.get_or_404(pet_id)
     form = EditPetForm(obj=pet)
 
     if form.validate_on_submit():
@@ -76,6 +74,7 @@ def pet_page(pet_id):
 
         db.session.commit()
 
+#TODO: flash added hoorah
         return redirect("/")
 
     else:
