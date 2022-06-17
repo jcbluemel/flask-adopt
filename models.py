@@ -35,7 +35,6 @@ class Pet(db.Model):
         nullable=false)
     photo_url = db.Column(
         db.Text,
-        nullable=false,
         default='')
     age = db.Column(
         db.Text,
